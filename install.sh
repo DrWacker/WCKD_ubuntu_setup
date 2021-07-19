@@ -3,32 +3,19 @@
 #-thanks----------------------------------------------------------------------
 
 #-prereqs---------------------------------------------------------------------
-apt install -y dpkg curl
+apt install -y dpkg curl git
 mkdir -p ~/.local/bin
 case ":$PATH:" in
 *":~/.local/bin/"*) :;;
 *) PATH="$PATH:~/.local/bin";;
 esac
+cp .wckr_bashrc ~
+grep 'source .wckr_bashrc' ~/.bashrc || echo 'source .wckr_bashrc' >> ~/.bashrc
 #-prereqs---------------------------------------------------------------------
 
 #-vim-------------------------------------------------------------------------
 apt install -y vim
-cat <<EOT >> ~/.vimrc
-set expandtab
-set smarttab
-set shiftwidth=2
-set tabstop=2
-set ai "Auto indent
-set si "Smart indent
-
-syntax enable
-set hlsearch
-
-try
-  colorscheme slate
-catch
-endtry
-EOT
+cp .vimrc ~/.vimrc
 #-vim-------------------------------------------------------------------------
 
 #-ripgrep---------------------------------------------------------------------
@@ -52,36 +39,7 @@ rm git-delta_0.8.3_amd64.deb
 #-bat-------------------------------------------------------------------------
 apt install -y bat
 ln -s $(which batcat) ~/.local/bin/bat
-cat <<EOT >> ~/.config/bat/config
-# This is `bat`s configuration file. Each line either contains a comment or
-# a command-line option that you want to pass to `bat` by default. You can
-# run `bat --help` to get a list of all possible configuration options.
-
-# Specify desired highlighting theme (e.g. "TwoDark"). Run `bat --list-themes`
-# for a list of all available themes
-#--theme="TwoDark"
-
-# Enable this to use italic text on the terminal. This is not supported on all
-# terminal emulators (like tmux, by default):
-#--italic-text=always
-
-# Uncomment the following line to disable automatic paging:
---paging=never
-
-# Uncomment the following line if you are using less version >= 551 and want to
-# enable mouse scrolling support in `bat` when running inside tmux. This might
-# disable text selection, unless you press shift.
-#--pager="less --RAW-CONTROL-CHARS --quit-if-one-screen --mouse"
-
-# Syntax mappings: map a certain filename pattern to a language.
-#   Example 1: use the C++ syntax for .ino files
-#   Example 2: Use ".gitignore"-style highlighting for ".ignore" files
-#--map-syntax "*.ino:C++"
-#--map-syntax ".ignore:Git Ignore"
-
-# Don't show line numbers or any other decorations
---plain
-EOT
+cp .bat_config ~/.config/bat/config
 #-bat-------------------------------------------------------------------------
 
 rm -rf $(dirname $0)
