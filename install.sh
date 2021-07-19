@@ -10,7 +10,7 @@ case ":$PATH:" in
 *) PATH="$PATH:~/.local/bin";;
 esac
 cp .wckr_bashrc ~
-grep 'source .wckr_bashrc' ~/.bashrc || echo 'source .wckr_bashrc' >> ~/.bashrc
+grep 'source ~/.wckr_bashrc' ~/.bashrc || echo 'source .wckr_bashrc' >> ~/.bashrc
 #-prereqs---------------------------------------------------------------------
 
 #-vim-------------------------------------------------------------------------
@@ -26,20 +26,14 @@ rm ripgrep_12.1.1_amd64.deb
 #-ripgrep---------------------------------------------------------------------
 
 #-fdfind----------------------------------------------------------------------
-apt install fd-find
-ln -s $(which fdfind) ~/.local/bin/fd
+curl -LO https://github.com/sharkdp/fd/releases/download/v8.2.1/fd_8.2.1_amd64.deb
+dpkg -i fd_8.2.1_amd64.deb
+which fd || ln -s $(which fdfind) ~/.local/bin/fd
+rm fd_8.2.1_amd64.deb
 #-fdfind----------------------------------------------------------------------
-
-#-delta-----------------------------------------------------------------------
-curl -LO https://github.com/dandavison/delta/releases/download/0.8.3/git-delta_0.8.3_amd64.deb
-dpkg -i git-delta_0.8.3_amd64.deb
-rm git-delta_0.8.3_amd64.deb
-#-delta-----------------------------------------------------------------------
 
 #-bat-------------------------------------------------------------------------
 apt install -y bat
-ln -s $(which batcat) ~/.local/bin/bat
+which bat || ln -s $(which batcat) ~/.local/bin/bat
 cp .bat_config ~/.config/bat/config
 #-bat-------------------------------------------------------------------------
-
-rm -rf $(dirname $0)
