@@ -46,7 +46,7 @@ rm git-delta_0.8.3_amd64.deb
 #-delta-----------------------------------------------------------------------
 
 #-bat-------------------------------------------------------------------------
-apt install -f bat
+apt install -y bat
 ls -s $(which batcat) ~/.local/bin/bat
 cat <<EOT >> ~/.config/bat/config
 # This is `bat`s configuration file. Each line either contains a comment or
