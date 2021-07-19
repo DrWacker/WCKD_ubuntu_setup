@@ -5,6 +5,10 @@
 #-prereqs---------------------------------------------------------------------
 apt install -y dpkg curl
 mkdir -p ~/.local/bin
+case ":$PATH:" in
+*":~/.local/bin/"*) :;;
+*) PATH="$PATH:~/.local/bin";;
+esac
 #-prereqs---------------------------------------------------------------------
 
 #-vim-------------------------------------------------------------------------
@@ -36,7 +40,7 @@ rm ripgrep_12.1.1_amd64.deb
 
 #-fdfind----------------------------------------------------------------------
 apt install fd-find
-ls -s $(which fdfind) ~/.local/bin/fd
+ln -s $(which fdfind) ~/.local/bin/fd
 #-fdfind----------------------------------------------------------------------
 
 #-delta-----------------------------------------------------------------------
@@ -47,7 +51,7 @@ rm git-delta_0.8.3_amd64.deb
 
 #-bat-------------------------------------------------------------------------
 apt install -y bat
-ls -s $(which batcat) ~/.local/bin/bat
+ln -s $(which batcat) ~/.local/bin/bat
 cat <<EOT >> ~/.config/bat/config
 # This is `bat`s configuration file. Each line either contains a comment or
 # a command-line option that you want to pass to `bat` by default. You can
