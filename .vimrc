@@ -7,6 +7,8 @@ set softtabstop=2
 set ai "Auto indent
 set si "Smart indent
 
+nnoremap <C-i> i_<Esc>r
+
 syntax enable
 
 set t_Co=256
@@ -29,11 +31,7 @@ else
   let g:netrw_liststyle = 3
   let g:netrw_browse_split = 4
   let g:netrw_altv = 1
-  augroup ProjectDrawer
-    autocmd!
-    autocmd VimEnter * :Vexplore
-    autocmd VimEnter * :vertical resize 20
-  augroup END
+
   set colorcolumn=80
   :highlight ColorColumn ctermbg=darkgrey
 endif
