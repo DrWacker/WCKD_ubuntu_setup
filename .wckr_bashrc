@@ -12,3 +12,5 @@ function git_branch {
   git branch 2>/dev/null | sed -e "/^[^*]/d" -e "s/* /[/" -e "s/$/]/" 
 }
 PROMPT_COMMAND="PS1='(\$?)\[\033[31m\]\u@\[\033[36m\]\$(machine):\[\033[92m\]\$(shortpath)\[\033[93m\]\$(git_branch)\[\033[0m\]>'"
+
+export HISTTIMEFORMAT="%d/%m/%y %T "
